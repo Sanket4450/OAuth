@@ -6,7 +6,13 @@ const usersDataPath = join(process.cwd(), 'data', 'users.json')
 export const getUserData = async () => {
   const data = await readFileAsync(usersDataPath, { encoding: 'utf-8' })
 
-  return JSON.parse(data)
+  let parsedData = []
+
+  try {
+    parsedData = JSON.parse(data)
+  } catch (error) {}
+
+  return parsedData
 }
 
 export const saveUserData = (existingUsersData: any[], user: any) => {

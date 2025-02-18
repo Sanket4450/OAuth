@@ -3,6 +3,10 @@ import passport from 'passport'
 
 const router = express.Router()
 
+router.get('/login', (_req: Request, res: Response, _next: NextFunction) => {
+  res.render('login')
+})
+
 router.get(
   '/google',
   passport.authenticate('google', { scope: ['email', 'profile'] })
@@ -17,9 +21,18 @@ router.get(
   })
 )
 
-router.get('/login', function (req, res, next) {
-  res.render('login')
-})
+router.get(
+  '/github',
+  passport.authenticate('github', { scope: ['user:email'] })
+)
+
+router.get(
+  '/github/callback',
+  passport.authenticate('github', { failureRedirect: '/auth/login' }),
+  (_req: Request, res: Response) => {
+    res.redirect('/auth/dashboard')
+  }
+)
 
 const checkAuthenticated = (
   req: Request,
