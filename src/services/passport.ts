@@ -41,7 +41,6 @@ export const setupPassport = (passport: passport.PassportStatic) => {
   )
 
   passport.serializeUser(async (user: Express.User, done) => {
-    console.log(user)
     const existingUsersData = await getUserData()
     try {
       const userId = saveUserData(existingUsersData, user)
