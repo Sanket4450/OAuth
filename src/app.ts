@@ -39,7 +39,7 @@ app.use(passport.session())
 setupPassport(passport)
 
 app.get('/', (_req: Request, res: Response) => {
-  res.status(200).send('Server is running')
+  res.status(200).send('App is running')
 })
 
 // Routes
